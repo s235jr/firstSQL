@@ -13,29 +13,11 @@ public class SQL {
     public static void main(String[] args) {
 
         Pracownik marcin = new Pracownik(8, "Marcin", "Takise", 26, 80, 0);
-        //marcin.save();
+        marcin.save();
         Pracownik pracownik = new Pracownik();
         pracownik.showWorker();
-        //countWynagrodzenie();
-        //showPosition();
-
-
-
-
-
-        /*String enquire = "UPDATE pracownik SET idstanowiska = 2 WHERE ID = 1";
-        try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test2", "root", "Admin1234!");
-            Statement statement = con.createStatement();
-            statement.executeUpdate(enquire);
-        } catch (SQLException error) {
-            System.out.println("Coś poszło nie tak. " + error.getMessage());
-        }*/
-
-
-
-
-
+        countWynagrodzenie();
+        showPosition();
     }
 
     static void showPosition() {
@@ -46,15 +28,10 @@ public class SQL {
             while (result.next()) {
                 System.out.println(result.getString("idstanowiska") + " " + result.getString("stanowisko"));
             }
-
-
         } catch (SQLException error) {
             System.out.println("Coś poszło nie tak." + error.getMessage());
         }
     }
-
-
-
 
     static void countWynagrodzenie() {
         try {
@@ -65,7 +42,6 @@ public class SQL {
                 ResultSet result = statement.executeQuery(sql);
                 while (result.next()) {
                     double wynagrodzenie = result.getInt("Stawka") * result.getInt("Ilosc_godzin");
-                    //sql = "UPDATE pracownik SET wynagrodzenie = " + wynagrodzenie + " WHERE ID = " + i;
                     sql = "UPDATE pracownik SET wynagrodzenie = " + wynagrodzenie + " WHERE ID = " + i;
                     statement = con.createStatement();
                     statement.executeUpdate(sql);

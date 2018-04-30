@@ -36,9 +36,8 @@ class Pracownik extends SQL {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test2", "root", "Admin1234!");
             Statement statement = con.createStatement();
-            //String sql = "SELECT * FROM pracownik WHERE ID = " + id + "INNER JOIN stanowiska USING idstanowiska;
-            //String sql = "SELECT * FROM pracownik WHERE ID = " + id + "INNER JOIN stanowiska USING (idstanowiska)";
-            String sql = "SELECT pracownik.Imie, pracownik.Nazwisko, pracownik.Wynagrodzenie, stanowiska.stanowisko FROM pracownik JOIN stanowiska ON pracownik.idstanowiska = stanowiska.idstanowiska WHERE stanowisko = 'Spawacz';";
+            String sql = "SELECT pracownik.Imie, pracownik.Nazwisko, pracownik.Wynagrodzenie, stanowiska.stanowisko " +
+                    "FROM pracownik JOIN stanowiska ON pracownik.idstanowiska = stanowiska.idstanowiska WHERE stanowisko = 'Spawacz';";
             ResultSet result = statement.executeQuery(sql);
             ResultSetMetaData resultMD = result.getMetaData();
             int countColumn = resultMD.getColumnCount();
@@ -48,15 +47,12 @@ class Pracownik extends SQL {
                 }
                 System.out.println();
 
-
                 //System.out.println(result.getString("ID") + " " + result.getString("Imie") + " " + result.getString("Nazwisko") + " " + result.getString("Stawka") + " " + result.getString("Ilosc_godzin") + " " + result.getString("Wynagrodzenie") + " " + result.getString("idstanowiska"));
                 //System.out.println(result.getString("Imie") +", " + result.getString("Nazwisko") + ", " + result.getString("stanowisko"));
-
             }
         } catch (SQLException error) {
             System.out.println("Coś poszło nie tak. " + error.getMessage());
         }
         return;
     }
-
 }
